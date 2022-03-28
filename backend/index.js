@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
 
     readFile(database, 'utf8', (err, data) => {
         if (err) {
-            res.json({ status: 'failed', message: 'Nepavyko perskaityti failo' })
+            res.json({ status: 'failed', message: 'Not able to read the file' })
         } else {
             data = JSON.parse(data);
             res.json({ status: 'success', data })
@@ -29,7 +29,7 @@ app.get('/:id', (req, res) => {
     let id = req.params.id;
     readFile(database, 'utf8', (err, data) => {
         if (err) {
-            res.json({ status: 'failed', message: 'Nepavyko perskaityti failo' })
+            res.json({ status: 'failed', message: 'Not able to read the file' })
             return
         }
 
@@ -37,7 +37,7 @@ app.get('/:id', (req, res) => {
 
         const jsonId = json.findIndex((el) => el.id == id);
         if (jsonId === -1) {
-            res.json({ status: 'failed', message: 'Nepavyko rasti tokio elemento' });
+            res.json({ status: 'failed', message: 'Not able to find the element' });
             return
         }
         let info = json[jsonId];
@@ -50,7 +50,7 @@ app.post('/add-toDo', (req, res) => {
 
     readFile(database, 'utf8', (err, data) => {
         if (err) {
-            res.json({ status: 'failed', message: 'Nepavyko perskaityti failo' })
+            res.json({ status: 'failed', message: 'Not able to read the file' })
             return
         }
         let json = JSON.parse(data);
@@ -59,9 +59,9 @@ app.post('/add-toDo', (req, res) => {
 
         writeFile(database, JSON.stringify(json), 'utf8', err => {
             if (err) {
-                res.json({ status: 'failed', message: 'Nepavyko įrašyti failo' })
+                res.json({ status: 'failed', message: 'Not able to save the file' })
             } else {
-                res.json({ status: 'success', message: 'Failas įrašytas' })
+                res.json({ status: 'success', message: 'File successfully saved' })
             }
         })
     })
@@ -71,7 +71,7 @@ app.delete('/delete-toDo/:id', (req, res) => {
     let id = req.params.id;
     readFile(database, 'utf8', (err, data) => {
         if (err) {
-            res.json({ status: 'failed', message: 'Nepavyko perskaityti failo' })
+            res.json({ status: 'failed', message: 'Not able to read the file' })
             return
         }
 
@@ -79,7 +79,7 @@ app.delete('/delete-toDo/:id', (req, res) => {
 
         const jsonId = json.findIndex((el) => el.id == id);
         if (jsonId === -1) {
-            res.json({ status: 'failed', message: 'Nepavyko rasti tokio elemento' });
+            res.json({ status: 'failed', message: 'Not able to find the element' });
             return
         }
 
@@ -88,9 +88,9 @@ app.delete('/delete-toDo/:id', (req, res) => {
 
         writeFile(database, jsonString, 'utf8', (err) => {
             if (err) {
-                res.json({ status: 'failed', message: 'Nepavyko įrašyti failo' });
+                res.json({ status: 'failed', message: 'Not able to save the file' });
             } else {
-                res.json({ status: 'success', message: 'Elementas sėkmingai ištrintas' });
+                res.json({ status: 'success', message: 'Element successfully deleted' });
             }
         })
     })
@@ -101,7 +101,7 @@ app.delete('/mass-delete', (req, res) => {
 
     readFile(database, 'utf8', (err, data) => {
         if (err) {
-            res.json({ status: 'failed', message: 'Nepavyko perskaityti failo' })
+            res.json({ status: 'failed', message: 'Not able to read the file' })
             return
         }
 
@@ -117,9 +117,9 @@ app.delete('/mass-delete', (req, res) => {
 
         writeFile(database, jsonString, 'utf8', (err) => {
             if (err) {
-                res.json({ status: 'failed', message: 'Nepavyko įrašyti failo' });
+                res.json({ status: 'failed', message: 'Not able to save the file' });
             } else {
-                res.json({ status: 'success', message: 'Elementas sėkmingai ištrintas' });
+                res.json({ status: 'success', message: 'Element successfully deleted' });
             }
         })
     })
@@ -129,7 +129,7 @@ app.put('/mark-done/:id', (req, res) => {
     let id = req.params.id;
     readFile(database, 'utf8', (err, data) => {
         if (err) {
-            res.json({ status: 'failed', message: 'Nepavyko perskaityti failo' })
+            res.json({ status: 'failed', message: 'Not able to read file' })
             return
         }
 
@@ -137,7 +137,7 @@ app.put('/mark-done/:id', (req, res) => {
 
         const jsonId = json.findIndex((el) => el.id == id);
         if (jsonId === -1) {
-            res.json({ status: 'failed', message: 'Nepavyko rasti tokio elemento' });
+            res.json({ status: 'failed', message: 'Not able to find the element' });
             return
         }
 
@@ -147,9 +147,9 @@ app.put('/mark-done/:id', (req, res) => {
 
         writeFile(database, jsonString, 'utf8', (err) => {
             if (err) {
-                res.json({ status: 'failed', message: 'Nepavyko įrašyti failo' });
+                res.json({ status: 'failed', message: 'Not able to save the file' });
             } else {
-                res.json({ status: 'success', message: 'Elementas sėkmingai ištrintas' });
+                res.json({ status: 'success', message: 'Task status changed' });
             }
         })
     })
@@ -160,7 +160,7 @@ app.put('/edit/:id', (req, res) => {
     let editedTask = req.body.task;
     readFile(database, 'utf8', (err, data) => {
         if (err) {
-            res.json({ status: 'failed', message: 'Nepavyko perskaityti failo' })
+            res.json({ status: 'failed', message: 'Not able to read the file' })
             return
         }
 
@@ -168,7 +168,7 @@ app.put('/edit/:id', (req, res) => {
 
         const jsonId = json.findIndex((el) => el.id == id);
         if (jsonId === -1) {
-            res.json({ status: 'failed', message: 'Nepavyko rasti tokio elemento' });
+            res.json({ status: 'failed', message: 'Not able to find the element' });
             return
         }
 
@@ -187,5 +187,5 @@ app.put('/edit/:id', (req, res) => {
 })
 
 app.listen(5004, () => {
-    console.log("Serveris veikia");
+    console.log("Server works");
 })
