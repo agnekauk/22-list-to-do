@@ -1,0 +1,77 @@
+@import './font-awesome.min.css';
+
+body {
+    background-color: darkslategrey;
+    font-size: 18px;
+}
+.todo-container {
+    background-color: #fff;
+    border: solid 3px goldenrod;
+    border-radius: 10px;
+    color: goldenrod;
+    max-width: 600px;
+    margin-top: 80px;
+    padding: 40px;
+}
+
+.btn {
+    background-color: goldenrod;
+    color: black;
+}
+
+.messages {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+li {
+    padding: 10px 10px;
+    border-bottom: solid 2px goldenrod;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+li:first-child {
+    border-top: solid 2px goldenrod;
+}
+
+.mark-done {
+    flex-grow: 3;
+    text-decoration: none;
+    color: goldenrod;
+}
+input[type='checkbox'] {
+    height: 18px;
+    width: 18px;
+}
+
+.delete-todo {
+    background-color: #6c757d;
+    color: #fff;
+}
+.delete-todo:hover {
+    background-color: goldenrod;
+    color: #000;
+}
+
+ul {
+    margin-top: 60px;
+    padding-left: 0;
+}
+
+.done {
+    text-decoration: line-through;
+}
+
+.actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.fa {
+    font-size: 40px;
+}
