@@ -5,7 +5,7 @@ List To Do
 
 This project is for educational porpuses only. Pull request are welcome, but priority for project authors! Thank you for your cooperation!
 
-Site published at: https://agnekauk.github.io/list-to-do/
+Site published at:
 
 Project features
 
