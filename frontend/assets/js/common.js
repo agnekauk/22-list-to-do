@@ -12,9 +12,27 @@ const messages = (message, status) => {
     }, 8000)
 }
 
+// žemiau esantis url kintamasis, nesusijęs su aukščiau aprašyta konstanta
+
+const transferData = async (url, method = 'GET', data = []) => {
+    let options = {
+        method: method,
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+
+    if (method != 'GET') {
+        options.body = JSON.stringify(data);
+    }
+
+    const resp = await fetch(url, options);
+
+    return resp.json()
+}
+
 const getData = () => {
-    fetch(url)
-        .then(response => response.json())
+    transferData(url)
         .then(response => {
             if (response.status === 'success') {
                 html = '<ul>'
@@ -36,10 +54,8 @@ const getData = () => {
                 document.querySelectorAll('.mark-done').forEach(element => {
                     let id = element.parentElement.getAttribute('data-id');
                     element.addEventListener('click', () => {
-                        fetch(url + '/mark-done/' + id, {
-                            method: "PUT",
-                        })
-                            .then(resp => resp.json())
+
+                        transferData(url + '/mark-done/' + id, 'PUT')
                             .then(resp => {
                                 if (resp.status === 'success') {
                                     getData();
@@ -53,9 +69,7 @@ const getData = () => {
                     let id = element.parentElement.getAttribute('data-id');
 
                     element.addEventListener('click', () => {
-                        fetch(url + '/' + id, {
-                        })
-                            .then(resp => resp.json())
+                        transferData(url + '/' + id)
                             .then(resp => {
                                 if (resp.status === 'success') {
                                     document.querySelector('#new-todo').value = resp.info.task;
@@ -71,10 +85,7 @@ const getData = () => {
                     let id = element.parentElement.getAttribute('data-id');
 
                     element.addEventListener('click', () => {
-                        fetch(url + '/delete-todo/' + id, {
-                            method: 'DELETE'
-                        })
-                            .then(resp => resp.json())
+                        transferData(url + '/delete-todo/' + id, 'DELETE')
                             .then(resp => {
                                 getData();
                                 messages(resp.message, resp.status);
@@ -97,7 +108,9 @@ const getData = () => {
         })
 }
 
-getData();
+window.addEventListener('load', () => {
+    getData();
+})
 
 addNewToDo.addEventListener('click', () => {
     let task = document.querySelector('#new-todo').value;
@@ -122,14 +135,7 @@ addNewToDo.addEventListener('click', () => {
 
     }
 
-    fetch(route, {
-        method: method,
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ task }),
-    })
-        .then(resp => resp.json())
+    transferData(route, method, { task })
         .then(resp => {
             if (resp.status === 'success') {
                 getData();
@@ -148,14 +154,7 @@ document.querySelector('#mass-delete').addEventListener('click', () => {
     document.querySelectorAll('.mass-delete:checked').forEach(element => {
         ids.push(element.parentElement.getAttribute('data-id'));
     })
-    fetch(url + '/mass-delete', {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ ids }),
-    })
-        .then(resp => resp.json())
+    transferData(url + '/mass-delete', 'DELETE', { ids })
         .then(resp => {
             if (resp.status === 'success') {
                 getData();
