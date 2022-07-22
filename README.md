@@ -1,4 +1,4 @@
-LICENSE Security Status Gluten Status Eco Status
+
 List To Do
 
 32 group website project
