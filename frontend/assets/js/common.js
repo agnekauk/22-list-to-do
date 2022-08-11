@@ -122,7 +122,7 @@ addNewToDo.addEventListener('click', () => {
     if (task === '') {
         let messages = document.querySelector('.messages');
         messages.innerHTML = 'Add a task';
-        messages.classList.add('show');
+        messages.classList.add('show', 'alert-warning');
         return
     }
 
