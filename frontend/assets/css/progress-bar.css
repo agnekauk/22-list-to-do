@@ -11,6 +11,7 @@
     background-color: goldenrod;
     position: absolute;
     top: 0px;
+    transition: width 400ms ease-in-out;
 }
 
 .count {
@@ -21,4 +22,21 @@
     text-align: center;
     padding: 5px 0px;
     z-index: 1;
+}
+
+@media(max-width: 460px){
+    .progress-bar{
+        display: flex;
+        width: 80%;
+        height: 40px;
+    }
+    .count {
+        top: 3px;
+    }
+}
+
+@media (max-width: 370px) {
+    .count {
+        top: 5px;
+    }
 }

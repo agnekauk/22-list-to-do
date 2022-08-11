@@ -9,8 +9,8 @@ body {
     border: solid 3px goldenrod;
     border-radius: 10px;
     color: goldenrod;
-    max-width: 600px;
-    margin-top: 80px;
+    max-width: 500px;
+    margin-top: 40px;
     padding: 40px;
 }
 
@@ -74,4 +74,31 @@ ul {
 
 .fa {
     font-size: 40px;
+}
+
+@media (max-width: 460px) {
+    body {
+        font-size: 15px;
+    }
+    .actions {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+    .fa {
+        font-size: 35px;
+    }
+}
+@media (max-width: 370px) {
+    body {
+        font-size: 13px;
+    }
+    .delete-todo {
+        font-size: 15px;
+    }
+    input[type='checkbox'] {
+        height: 13px;
+        width: 13px;
+    }
 }
